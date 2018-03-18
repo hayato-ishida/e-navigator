@@ -1,0 +1,32 @@
+<div class="main interviews-new">
+  <div class="container">
+    <div class="form-heading"><%= @user.name %>さんの承認状態変更</div>  <!--ページタイトル-->
+    <div class="form interviews-form">
+      <div class="form-body">
+        <% @interview.errors.full_messages.each do |message| %> <!--エラーメッセージを変数に格納-->
+          <div class="form-error">
+            <%= message %>  <!--エラーメッセージを出力-->
+          </div>
+        <% end %>
+
+        <%= form_tag("/users/#{@interview.user_id}/interviews/#{@interview.id}/status_update", method: :post, data: {confirm: '承認状態を変更します。宜しいですか?'}) do %> <!--パラメーターをupdateアクションに送信-->
+			<p><%= @interview.datetime.strftime("%Y年%m月%d日 %H時%M分") %></p>
+			<% if @interview.status.eql?("保留") %>
+			<input type="radio" name="status" value="保留" checked>保留<br>
+			<input type="radio" name="status" value="承認">承認<br>
+			<input type="radio" name="status" value="却下">却下<br>
+			<% elsif @interview.status.eql?("承認") %>
+			<input type="radio" name="status" value="保留">保留<br>
+			<input type="radio" name="status" value="承認" checked>承認<br>
+			<input type="radio" name="status" value="却下">却下<br>
+			<% else %>
+			<input type="radio" name="status" value="保留">保留<br>
+			<input type="radio" name="status" value="承認">承認<br>
+			<input type="radio" name="status" value="却下" checked>却下<br>
+			<% end %>
+			<p><input type="submit" value="更新"></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

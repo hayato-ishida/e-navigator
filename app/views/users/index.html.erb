@@ -1,0 +1,33 @@
+<div class="main users-index">
+  <div class="container">
+    <h1 class="users-heading">ユーザー一覧</h1>
+      <div class="users-index-item">
+        <div class="user-right">
+        <table>
+          <tr>
+          <th>氏名</th>
+          <th>Email</th>
+          <th>年齢</th>
+          <th>性別</th>
+          <th>大学</th>
+          <th>面接日時</th>
+          <th>面接一覧</th>
+          </tr>
+          <% @users.each do |user| %>
+          <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.age %></td>
+          <td><%= user.sex %></td>
+          <td><%= user.university %></td>
+          <% user.interviews.where(status: "承認").each do |interview| %>
+          <td><%= interview.datetime.strftime("%Y年%m月%d日 %H時%M分") %></td>
+          <% end %>
+          <td><%= link_to("面接一覧", "/users/#{user.id}/interviews") %></td>
+          </tr>
+          <% end %>
+          </table>
+        </div>
+      </div>
+  </div>
+</div>

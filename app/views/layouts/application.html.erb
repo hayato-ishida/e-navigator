@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ENavigator</title>
+    <title>e-Navigator(石田隼人)</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <div class="header">
+      <% if @current_user %>
+        <h2>
+		  <% if @current_user.id != 0 %>
+          <%= link_to("#{@current_user.name}さんのプロフィール", "/users/#{@current_user.id}") %>
+		  <% end %>
+          <%= link_to("ユーザー一覧", "/users/index") %>
+		  <% if @current_user.id != 0 %>
+          <%= link_to("面接新規登録", "/users/#{@current_user.id}/interviews/new") %>
+          <%= link_to("面接一覧", "/users/#{@current_user.id}/interviews") %>
+		  <% end %>
+          <%= link_to("ログアウト", "/logout", method: :post, data: {confirm: 'ログアウトします。宜しいですか?'}) %>
+        </h2>
+      <% else %>
+        <h2>
+          <%= link_to("トップページ", "/") %>
+        </h2>
+      <% end %>
+    </div>
+
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
