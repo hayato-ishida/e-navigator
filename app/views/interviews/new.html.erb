@@ -1,0 +1,20 @@
+<div class="main interviews-new">
+  <div class="container">
+    <div class="form-heading">新規面接日程登録</div>  <!--ページタイトル-->
+    <div class="form interviews-form">
+      <div class="form-body">
+        <% @interview.errors.full_messages.each do |message| %> <!--エラーメッセージを変数に格納-->
+          <div class="form-error">
+            <%= message %>  <!--エラーメッセージを出力-->
+          </div>
+        <% end %>
+
+        <%= form_tag("/users/:id/interviews/create", method: :post) do %> <!--パラメーターをcreateアクションに送信-->
+          <p>日程選択</p>
+          <input type="datetime-local" name="datetime">
+          <p><input type="submit" value="新規登録"></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

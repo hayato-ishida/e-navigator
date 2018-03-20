@@ -1,0 +1,32 @@
+<div class="main users-edit">
+  <div class="container">
+    <div class="form-heading">ユーザー情報編集</div>
+    <div class="form users-form">
+      <div class="form-body">
+        <% @user.errors.full_messages.each do |message| %> <!--エラーメッセージを変数に格納-->
+          <div class="form-error">
+            <%= message %> <!--エラーメッセージを表示-->
+          </div>
+        <% end %>
+
+        <%= form_tag("/users/#{@user.id}/update", method: :post, data: {confirm: 'ユーザー情報を更新します。宜しいですか?'}) do %> <!--パラメーターをupdateアクションに送信-->
+        <p>ユーザー名</p>
+        <input type="text" name="name" value="<%= @user.name %>">
+        <p>性別</p>
+		<% if @user.sex.eql?("男") %>
+        <input type="radio" name="sex" value="男" checked>男<br>
+        <input type="radio" name="sex" value="女">女<br>
+		<% else %>
+        <input type="radio" name="sex" value="男">男<br>
+        <input type="radio" name="sex" value="女" checked>女<br>
+		<% end %>
+        <p>生年月日</p>
+        <input type="date" name="birthday" min="1980-01-01" max="2000-12-31" value="<%= @user.birthday %>">
+        <p>大学</p>
+        <input type="text" name="university" value="<%= @user.university %>">
+        <p><input type="submit" value="更新"></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

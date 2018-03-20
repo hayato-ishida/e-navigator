@@ -1,0 +1,18 @@
+<div class="main user-show">
+  <div class="container">
+    <div class="user">
+      <h2><%= @user.name %></h2> <!--showアクションで取得したユーザーの名前を表示-->
+      <td>メールアドレス</td>
+	  <td><%= @user.email %></td><br> <!--showアクションで取得したユーザーのメールアドレスを表示-->
+      <td>性別</td>
+	  <td><%= @user.sex %></td><br> <!--showアクションで取得したユーザーの性別を表示-->
+      <td>年齢</td>
+	  <td><%= @user.age %></td><br>  <!--showアクションで取得したユーザーの生年月日を表示-->
+      <td>出身大学</td>
+	  <td><%= @user.university %></td><br>  <!--showアクションで取得したユーザーの出身大学を表示-->
+      <% if @user.id == @current_user.id %>
+        <td><%= link_to("編集", "/users/#{@user.id}/edit") %></td>
+      <% end %>
+    </div>
+  </div>
+</div>

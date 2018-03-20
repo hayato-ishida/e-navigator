@@ -1,0 +1,20 @@
+<div class="main interviews-new">
+  <div class="container">
+    <div class="form-heading">面接日程変更</div>  <!--ページタイトル-->
+    <div class="form interviews-form">
+      <div class="form-body">
+        <% @interview.errors.full_messages.each do |message| %> <!--エラーメッセージを変数に格納-->
+          <div class="form-error">
+            <%= message %>  <!--エラーメッセージを出力-->
+          </div>
+        <% end %>
+
+        <%= form_tag("/users/#{@current_user.id}/interviews/#{@interview.id}/update", method: :post, data: {confirm: '面接日時を変更します。宜しいですか?'}) do %> <!--パラメーターをupdateアクションに送信-->
+          <p>日程選択</p>
+          <input type="datetime-local" name="datetime" value="<%= @interview.datetime %>">
+          <p><input type="submit" value="変更"></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
